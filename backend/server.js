@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const dns= require("node:dns/promises")
+const cartRoutes = require("./routes/cart")
+dns.setServers(["1.1.1.1"]);
 
 const app = express();
 
@@ -10,8 +13,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api/cart", cartRoutes)
+
 mongoose
-  .connect(procces.env.MONGO_URI)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log("Listening on port", process.env.PORT);
