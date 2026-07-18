@@ -9,6 +9,23 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const { food, quantity } = req.body;
 
+let emptyFields = [];
+
+if (!food) {
+    emptyFields.push("food");
+}
+
+if (!quantity || Number(quantity) <= 0) {
+    emptyFields.push("quantity");
+}
+
+if (emptyFields.length > 0) {
+    return res.status(400).json({
+        error: "Food/Quantity should not be empty",
+        emptyFields
+    });
+  }
+
   try {
     const item = await Item.create({ food, quantity });
     res.status(200).json(item);

@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 import Navbar from "./components/Navbar";
-import Cart from "./pages/Cart";
+import Home from "./pages/Home";
 import About from "./pages/About";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <Navbar/>
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Cart/>}/>
+            <Route path="/" element={<Home/>}/>
             <Route path="/about" element={<About/>}/>
           </Routes>
         </div>
